@@ -1,12 +1,34 @@
-# Final_Software
+# Automated Bubble Sheet and Essay Evaluation System
 
-This project is a desktop-style Eel app with a Flask backend API.
+This project is a desktop-style application built using Eel and Flask.
+It provides bubble-sheet scanning, essay OCR/evaluation, rubric generation, and admin reporting.
 
-## Password Reset Setup
+## Repository contents
 
-The forgot-password flow sends an OTP by SMTP and then lets the user reset their password.
+- `app/` - backend API, database initialization, authentication, and server logic
+- `web/` - frontend HTML/CSS/JavaScript user interface
+- `data/` - application data storage, sample files, and generated outputs
+- `best.pt`, `model4_cnn.h5` - model weights used by the OMR and fold detection components
+- `main.py` - application entry point for launching the desktop app
 
-### Required `.env` values
+## Prerequisites
+
+- Python 3.10 or newer
+- Git (for cloning and pushing)
+
+## Setup
+
+From `F:\Final_Software`:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+## Environment variables
+
+Create a `.env` file in the repository root with the following values:
 
 ```env
 SMTP_HOST=smtp.gmail.com
@@ -15,25 +37,55 @@ SMTP_USERNAME=your_email@gmail.com
 SMTP_PASSWORD=your_gmail_app_password
 SMTP_FROM_EMAIL=your_email@gmail.com
 SMTP_USE_TLS=true
+GEMINI_API_KEY=your_gemini_api_key
+DEFAULT_ADMIN_USERNAME=admin
+DEFAULT_ADMIN_PASSWORD=admin123
+DEFAULT_ADMIN_EMAIL=admin@example.com
 ```
 
 ### Notes
 
-- Use a Gmail App Password, not your normal Gmail password.
-- `SMTP_USERNAME` and `SMTP_FROM_EMAIL` should usually be the same email address.
-- The app removes spaces from `SMTP_PASSWORD`, so copied App Passwords with spaces still work.
+- Use a Gmail App Password for `SMTP_PASSWORD` if using Gmail SMTP.
+- `GEMINI_API_KEY` is required only for rubric generation and essay evaluation features.
+- `DEFAULT_ADMIN_*` values let the app create the initial admin user on first run.
 
-## Flow
-
-1. Open the login page.
-2. Click `Forgot password?`.
-3. Enter your email and request OTP.
-4. Open `reset-password.html`.
-5. Enter email, OTP, and new password.
-6. Submit to reset the password.
-
-## Run
+## Run the app
 
 ```powershell
-& e:\Final_Software\.venv310\Scripts\python.exe e:/Final_Software/main.py
+.\.venv\Scripts\Activate.ps1
+python main.py
 ```
+
+Then use the local Eel UI that opens in your browser.
+
+## Default login
+
+- Admin user: `admin`
+- Password: `admin123`
+
+If `DEFAULT_ADMIN_USERNAME` or `DEFAULT_ADMIN_PASSWORD` are changed in `.env`, use those values instead.
+
+## Important files and folders
+
+- `users.json` - optional user import source for the backend
+- `data/app.db` - application database (generated at runtime; not included in Git)
+- `data/sample_answer_key.csv` - sample answer key data
+- `data/master_sheet.tif` - sample bubble sheet master image
+
+## GitHub repository
+
+This repository is configured to push only the necessary application code and UI files.
+Generated and local files are ignored in `.gitignore`, including:
+
+- `.venv/`
+- `data/app.db`
+- `database.db`
+- `data.db`
+- `*.pyc`
+- `*.xlsx`
+- `essay01.jpeg`, `essay02.jpeg`
+
+## Notes for contributors
+
+- Do not commit local environment folders or generated database files.
+- If you add new sample data, update `.gitignore` only if those files should remain local.
