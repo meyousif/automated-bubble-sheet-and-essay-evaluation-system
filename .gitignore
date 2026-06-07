@@ -1,0 +1,25 @@
+.venv/
+.venv310/
+__pycache__/
+build/
+dist/
+submission_bundle/
+data/bubble_results/
+data/essay_uploads/
+data/tmp_bench/
+data/tmp_speed_check/
+database.db
+data.db
+*.xlsx
+essay01.jpeg
+essay02.jpeg
+results.xlsx
+key.xlsx
+folder 1/
+folder 1 - Copy/
+fwdresultverificationomrtestingissues/
+exception/
+*.pyc
+*.pyo
+*.pyd
+.env

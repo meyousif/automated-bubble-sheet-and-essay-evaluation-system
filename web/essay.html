@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliLearn - Essay Evaluation</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/essay.css">
+</head>
+
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>Automated Evaluation System</h2>
+                        <p>Bubble Sheet &amp; Essay</p>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a class="nav-link" href="dashboard.html">
+                        <i class="fas fa-border-all"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a class="nav-link" href="bubble.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Bubble Sheet Evaluation</span>
+                    </a>
+
+                    <a class="nav-link active" href="essay.html">
+                        <i class="fas fa-file-lines"></i>
+                        <span>Essay Evaluation</span>
+                    </a>
+
+                    <a class="nav-link" href="reports.html">
+                        <i class="fas fa-chart-column"></i>
+                        <span>Reports &amp; Results</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                © Sukkur IBA University<br>
+                FYP Code: 22F-20
+            </div>
+        </aside>
+
+        <section class="main-panel">
+            <header class="topbar">
+                <div class="topbar-right">
+                    <div class="role-badge" id="roleBadge">Examiner</div>
+
+                    <button class="btn btn-outline topbar-logout-btn" id="logoutMenuBtn" type="button">
+                        Logout
+                    </button>
+                </div>
+            </header>
+
+            <main class="content-area">
+                <h1 class="page-title">Essay Evaluation</h1>
+                <p class="page-subtitle">
+                    Upload scanned essays for NLP-based evaluation and scoring.
+                </p>
+
+                <section class="upload-panel">
+                    <h2 class="section-title">Upload Essay</h2>
+                    <p class="field-label">Select Scanned Essay Image</p>
+
+                    <div class="essay-rubric-bar">
+                        <label for="essayRubricSelect">Evaluation Rubric</label>
+                        <select id="essayRubricSelect"></select>
+                        <div class="essay-rubric-meta" id="essayRubricMeta">Loading rubrics...</div>
+                    </div>
+
+                    <div class="upload-card">
+                        <input type="file" id="essayInput" accept=".jpg,.jpeg,.png" hidden>
+
+                        <div class="upload-dropzone" id="essayDropzone">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-arrow-up"></i>
+                            </div>
+
+                            <p class="upload-main-text">
+                                Drop your file here, or
+                                <span class="browse-link" id="essayBrowseTrigger">browse</span>
+                            </p>
+
+                            <p class="upload-subtext">Supports JPEG, PNG</p>
+                        </div>
+
+                        <div class="selected-file" id="selectedEssayFileBox">
+                            <div class="selected-file-left">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-image"></i>
+                                </div>
+                                <div>
+                                    <h4 id="selectedEssayFileName">No file selected</h4>
+                                    <p id="selectedEssayFileMeta">Please choose a valid image file</p>
+                                </div>
+                            </div>
+
+                            <button class="remove-file-btn" id="removeEssayFileBtn" type="button">
+                                <i class="fas fa-xmark"></i>
+                            </button>
+                        </div>
+
+                        <div class="tip-box">
+                            Tip: For best results, ensure the essay is clearly scanned with good lighting and minimal
+                            skew.
+                        </div>
+                    </div>
+                </section>
+
+                <div class="action-bar">
+                    <button class="start-btn" id="startEssayEvaluationBtn" type="button" disabled>
+                        <i class="fas fa-play"></i>
+                        <span>Preview Text</span>
+                    </button>
+                </div>
+            </main>
+        </section>
+    </div>
+
+    <div class="modal-overlay" id="essayCompleteModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="essayModalTitle">Evaluation Completed</h3>
+                <button class="modal-close" id="closeEssayModalBtn" type="button">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body" id="essayModalBody"></div>
+
+            <div class="modal-footer">
+                <button class="modal-secondary-btn" id="previewApproveBtn" type="button">
+                    Approve &amp; Evaluate
+                </button>
+                <button class="modal-action-btn" id="closeEssayModalFooterBtn" type="button">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Confirm Logout</h3>
+                <button class="modal-close" id="logoutModalCloseBtn" type="button">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to log out? Any unsaved changes will be lost.
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-secondary-btn" id="logoutCancelBtn" type="button">
+                    Cancel
+                </button>
+                <button class="modal-primary-btn" id="logoutConfirmBtn" type="button">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/eel-loader.js"></script>
+    <script>loadEelScript();</script>
+    <script src="js/session.js"></script>
+    <script src="js/essay.js"></script>
+</body>
+
+</html>

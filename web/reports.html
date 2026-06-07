@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliLearn - Reports & Results</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/reports.css">
+</head>
+
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>Automated Evaluation System</h2>
+                        <p>Bubble Sheet &amp; Essay</p>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a class="nav-link" href="dashboard.html">
+                        <i class="fas fa-border-all"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a class="nav-link" href="bubble.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Bubble Sheet Evaluation</span>
+                    </a>
+
+                    <a class="nav-link" href="essay.html">
+                        <i class="fas fa-file-lines"></i>
+                        <span>Essay Evaluation</span>
+                    </a>
+
+                    <a class="nav-link active" href="reports.html">
+                        <i class="fas fa-chart-column"></i>
+                        <span>Reports &amp; Results</span>
+                    </a>
+
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                © Sukkur IBA University<br>
+                FYP Code: 22F-20
+            </div>
+        </aside>
+
+        <section class="main-panel">
+            <header class="topbar">
+                <div class="topbar-right">
+                    <div class="role-badge" id="roleBadge">Examiner</div>
+
+                    <button class="btn btn-outline topbar-logout-btn" id="logoutMenuBtn" type="button">
+                        Logout
+                    </button>
+                </div>
+            </header>
+
+            <main class="content-area">
+                <h1 class="page-title">Reports &amp; Results</h1>
+                <p class="page-subtitle">
+                    View, filter, and export evaluation results.
+                </p>
+
+                <section class="reports-panel" id="reportsListPanel">
+                    <div class="filters-row">
+                        <div class="filter-group">
+                            <label for="searchFilter">Search exam name...</label>
+                            <input id="searchFilter" class="filter-select" type="text" placeholder="Search exam name">
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="typeFilter">All Types</label>
+                            <select id="typeFilter" class="filter-select">
+                                <option value="all">All Types</option>
+                                <option value="Bubble Sheet">Bubble Sheet</option>
+                                <option value="Essay">Essay</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="fromDateFilter">From date</label>
+                            <input id="fromDateFilter" class="filter-select" type="date">
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="toDateFilter">To date</label>
+                            <input id="toDateFilter" class="filter-select" type="date">
+                        </div>
+                    </div>
+
+                    <div class="report-grid user-report-grid" id="resultsTableBody"></div>
+                </section>
+
+                <section class="reports-panel details-panel" id="reportDetailsPanel" style="display:none; margin-top: 16px;">
+                    <div class="details-header">
+                        <div>
+                            <h2 class="page-title" id="detailsTitle">Evaluation Details</h2>
+                            <p class="page-subtitle" id="detailsMeta">Excel-style all students matrix</p>
+                        </div>
+                        <button class="export-btn" id="submitChangeRequestBtn" type="button" style="display:none;">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Send Change Request</span>
+                        </button>
+                        <button class="export-btn" id="previewToggleBtn" type="button">
+                            <i class="fas fa-image"></i>
+                            <span>Hide Preview</span>
+                        </button>
+                        <button class="export-btn" id="fullPreviewBtn" type="button">
+                            <i class="fas fa-up-right-and-down-left-from-center"></i>
+                            <span>Full Size</span>
+                        </button>
+                        <button class="export-btn" id="detailsBackBtn" type="button">
+                            <i class="fas fa-arrow-left"></i>
+                            <span>Back to Evaluations</span>
+                        </button>
+                    </div>
+
+                    <div class="sheet-preview-panel" id="sheetPreviewPanel">
+                        <div class="sheet-preview-image-wrap">
+                            <img id="sheetPreviewImage" alt="Sheet preview" style="display:none;" />
+                            <div class="sheet-preview-empty" id="sheetPreviewEmpty">Sheet preview not available for this row.</div>
+                        </div>
+                        <div class="sheet-preview-controls">
+                            <div class="sheet-preview-meta" id="sheetPreviewMeta">Sheet 0 / 0</div>
+                            <div class="sheet-preview-meta" id="sheetPreviewStudent">No student selected</div>
+                            <div class="sheet-preview-btns">
+                                <button class="export-btn" id="prevSheetBtn" type="button">
+                                    <i class="fas fa-chevron-left"></i>
+                                    <span>Previous</span>
+                                </button>
+                                <button class="export-btn" id="nextSheetBtn" type="button">
+                                    <span>Next</span>
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="essay-detail-panel" id="essayDetailPanel" style="display:none;">
+                        <div class="essay-detail-summary" id="essayDetailSummary"></div>
+                        <div class="essay-detail-result" id="essayDetailResult"></div>
+                    </div>
+
+                    <div class="table-wrap matrix-wrap">
+                        <table class="results-table matrix-table">
+                            <thead id="matrixHead"></thead>
+                            <tbody id="matrixBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </section>
+    </div>
+
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Confirm Logout</h3>
+                <button class="modal-close" id="logoutModalCloseBtn" type="button">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to log out? Any unsaved changes will be lost.
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-secondary-btn" id="logoutCancelBtn" type="button">
+                    Cancel
+                </button>
+                <button class="modal-primary-btn" id="logoutConfirmBtn" type="button">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="previewModal">
+        <div class="modal-card preview-modal-card">
+            <div class="modal-header">
+                <h3>Sheet Preview</h3>
+                <button class="modal-close" id="previewModalCloseBtn" type="button">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+            <div class="preview-modal-body">
+                <img id="previewModalImage" alt="Full size sheet preview" />
+            </div>
+            <div class="modal-footer">
+                <button class="modal-secondary-btn" id="previewModalBackBtn" type="button">
+                    Back
+                </button>
+                <button class="modal-primary-btn" id="previewModalCloseActionBtn" type="button">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/eel-loader.js"></script>
+    <script>loadEelScript();</script>
+    <script src="js/session.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+
+</html>

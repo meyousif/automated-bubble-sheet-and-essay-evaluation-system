@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliLearn - Dashboard</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>Automated Evaluation System</h2>
+                        <p>Bubble Sheet &amp; Essay</p>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a class="nav-link active" href="dashboard.html">
+                        <i class="fas fa-border-all"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a class="nav-link" href="bubble.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Bubble Sheet Evaluation</span>
+                    </a>
+
+                    <a class="nav-link" href="essay.html">
+                        <i class="fas fa-file-lines"></i>
+                        <span>Essay Evaluation</span>
+                    </a>
+
+                    <a class="nav-link" href="reports.html">
+                        <i class="fas fa-chart-column"></i>
+                        <span>Reports &amp; Results</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                © Sukkur IBA University<br>
+                FYP Code: 22F-20
+            </div>
+        </aside>
+
+        <section class="main-panel">
+            <header class="topbar">
+                <div class="topbar-right">
+                    <div class="role-badge" id="roleBadge">Examiner</div>
+
+                    <button class="btn btn-outline topbar-logout-btn" id="logoutMenuBtn" type="button">
+                        Logout
+                    </button>
+                </div>
+            </header>
+
+            <main class="content-area">
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">
+                    Welcome back! Here's an overview of your evaluation activity.
+                </p>
+
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-label">Bubble Sheets<br>Uploaded</div>
+                            <div class="stat-value" id="bubbleSheetsCount">0</div>
+                        </div>
+                        <div class="stat-icon icon-blue">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-label">Essays<br>Uploaded</div>
+                            <div class="stat-value" id="essaysCount">0</div>
+                        </div>
+                        <div class="stat-icon icon-purple">
+                            <i class="fas fa-file-lines"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-label">Evaluations<br>Completed</div>
+                            <div class="stat-value" id="evaluationsCount">0</div>
+                        </div>
+                        <div class="stat-icon icon-green">
+                            <i class="fas fa-square-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-label">Reports<br>Generated</div>
+                            <div class="stat-value" id="reportsCount">0</div>
+                        </div>
+                        <div class="stat-icon icon-orange">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="lower-grid">
+                    <div class="panel-card">
+                        <h2 class="panel-title">Recent Activity</h2>
+                        <div id="activityList" class="activity-list"></div>
+                    </div>
+                </section>
+            </main>
+        </section>
+    </div>
+
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Confirm Logout</h3>
+                <button class="modal-close" id="logoutModalCloseBtn" type="button">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to log out? Any unsaved changes will be lost.
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-secondary-btn" id="logoutCancelBtn" type="button">
+                    Cancel
+                </button>
+                <button class="modal-primary-btn" id="logoutConfirmBtn" type="button">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/eel-loader.js"></script>
+    <script>loadEelScript();</script>
+    <script src="js/session.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliLearn - Bubble Sheet Evaluation</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/bubble.css">
+</head>
+
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h2>Automated Evaluation System</h2>
+                        <p>Bubble Sheet &amp; Essay</p>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <a class="nav-link" href="dashboard.html">
+                        <i class="fas fa-border-all"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a class="nav-link active" href="bubble.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Bubble Sheet Evaluation</span>
+                    </a>
+
+                    <a class="nav-link" href="essay.html">
+                        <i class="fas fa-file-lines"></i>
+                        <span>Essay Evaluation</span>
+                    </a>
+
+                    <a class="nav-link" href="reports.html">
+                        <i class="fas fa-chart-column"></i>
+                        <span>Reports &amp; Results</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                © Sukkur IBA University<br>
+                FYP Code: 22F-20
+            </div>
+        </aside>
+
+        <section class="main-panel">
+            <header class="topbar">
+                <div class="topbar-right">
+                    <div class="role-badge" id="roleBadge">Examiner</div>
+
+                    <button class="btn btn-outline topbar-logout-btn" id="logoutMenuBtn" type="button">
+                        Logout
+                    </button>
+                </div>
+            </header>
+
+            <main class="content-area">
+                <h1 class="page-title">Bubble Sheet Evaluation</h1>
+                <p class="page-subtitle">
+                    Upload and evaluate scanned bubble sheets against answer keys.
+                </p>
+
+                <section class="upload-panel">
+                    <h2 class="section-title">Bubble Sheet Evaluation</h2>
+                    <p class="field-label">Select Approved Folder</p>
+
+                    <div class="upload-card">
+                        <div class="select-row">
+                            <div class="select-field">
+                                <label for="folderSelect">Approved Folder</label>
+                                <select id="folderSelect"></select>
+                            </div>
+                            <div class="select-field">
+                                <label for="answerKeySelect">Answer Key</label>
+                                <select id="answerKeySelect"></select>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-banner" id="evaluationBanner" hidden>
+                            <div class="evaluation-spinner" aria-hidden="true"></div>
+                            <div class="evaluation-banner-copy">
+                                <strong>Evaluation running in background</strong>
+                                <span id="evaluationBannerText">You can switch tabs. The GUI will keep tracking progress.</span>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-status" id="evaluationStatus">
+                            Select a folder and key to start evaluation.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="results-panel" id="resultsPanel">
+                    <h2 class="section-title">Results</h2>
+                    <div class="results-body" id="resultsBody">No results yet.</div>
+                </section>
+
+                <div class="action-bar">
+                    <button class="start-btn" id="startEvaluationBtn" type="button" disabled>
+                        <i class="fas fa-play"></i>
+                        <span>Start Evaluation</span>
+                    </button>
+                </div>
+            </main>
+        </section>
+    </div>
+
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Confirm Logout</h3>
+                <button class="modal-close" id="logoutModalCloseBtn" type="button">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                Are you sure you want to log out? Any unsaved changes will be lost.
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-secondary-btn" id="logoutCancelBtn" type="button">
+                    Cancel
+                </button>
+                <button class="modal-primary-btn" id="logoutConfirmBtn" type="button">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/eel-loader.js"></script>
+    <script>loadEelScript();</script>
+    <script src="js/session.js"></script>
+    <script src="js/bubble.js"></script>
+</body>
+
+</html>
