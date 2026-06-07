@@ -1,7 +1,17 @@
 # Automated Bubble Sheet and Essay Evaluation System
 
-This project is a desktop-style application built using Eel and Flask.
-It provides bubble-sheet scanning, essay OCR/evaluation, rubric generation, and admin reporting.
+A professional final year capstone project for automated exam processing and evaluation.
+This application combines optical mark recognition, essay OCR, rubric-based scoring, and admin reporting in a polished desktop-style interface.
+
+## Project summary
+
+This system is designed to help educators and examiners automatically process bubble-sheet answer forms and handwritten essays. It includes:
+
+- OMR scanning for multiple-choice/bubble-sheet answer extraction
+- Essay image OCR and evaluation workflows
+- AI-assisted rubric generation for essay grading
+- Web-based admin dashboard for report viewing and user management
+- Local desktop deployment via Eel with a Flask backend API
 
 ## Repository contents
 
@@ -84,6 +94,10 @@ Generated and local files are ignored in `.gitignore`, including:
 - `*.pyc`
 - `*.xlsx`
 - `essay01.jpeg`, `essay02.jpeg`
+
+## Contributors
+
+- **Yousif Ali** — Lead developer and project owner
 
 ## Notes for contributors
 
