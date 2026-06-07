@@ -4,6 +4,7 @@ __pycache__/
 build/
 dist/
 submission_bundle/
+data/app.db
 data/bubble_results/
 data/essay_uploads/
 data/tmp_bench/
